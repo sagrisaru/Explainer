@@ -100,6 +100,7 @@
       position: sticky;
       top: 0;
       height: 100vh;
+      height: 100svh; /* mobile: matches the visible screen, ignoring the address bar */
       width: 100%;
       overflow: hidden;
     }
@@ -131,8 +132,9 @@
     /* 2. The steps scroll OVER the image */
     .steps {
       position: relative;
-      z-index: 1;
       margin-top: -100vh;
+      margin-top: -100svh;
+      z-index: 1;
       /* pulls the text up on top of the sticky image */
     }
 
@@ -166,6 +168,61 @@
 
     .box p {
       margin: 0;
+    }
+
+        /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+
+      /* Text boxes: full width, sitting in the lower part of the screen */
+      .step {
+        align-items: flex-end;
+        padding: 1rem 1rem 10vh;
+      }
+
+      .step.title {
+        align-items: center;
+      }
+
+      .step.right {
+        justify-content: center;
+        padding-right: 1rem;
+      }
+
+      .step.right .box {
+        max-width: 100%;
+      }
+
+      /* Dark backing so the text stays readable over the photo */
+      .box {
+        font-size: 1rem;
+        padding: 1rem 1.25rem;
+        background: rgba(0, 0, 0, 0.72);
+        border-radius: 8px;
+      }
+
+      .box h2 {
+        font-size: 1.2rem;
+      }
+
+      /* "Left" images go to the top of the screen instead, above the text */
+      .layer.left {
+        background-position: top center;
+      }
+
+      /* Collages: two columns that fit the phone, small gaps */
+      .layer.collage {
+        grid-template-columns: repeat(2, 44vw);
+        grid-template-rows: auto;
+        gap: 12px;
+        align-content: start;
+        padding-top: 1.5rem;
+      }
+
+      /* Fixed backgrounds don't work on iPhones */
+      header,
+      footer {
+        background-attachment: scroll;
+      }
     }
   </style>
 </head>
