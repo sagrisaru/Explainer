@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,325;1,325&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Light Reading</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+
+.roboto-mono-<uniquifier> {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 325;
+  font-style: normal;
+}
+    
+
+    body {
+      margin: 0;
+      font-family: 'Roboto Mono', monospace;
+      color: #f2f2f2;
+      background: #111;
+    }
+
+
+
+    header,
+    footer {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 2rem;
+      color: #000;
+      background-image: url('Image\ 32.jpg');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      margin: 0 0 1rem;
+    }
+
+    .step.right {
+      justify-content: flex-end;
+      padding-right: 10vw;
+    }
+
+    .step.right .box {
+      max-width: 30vw;
+    }
+
+    .layer.left {
+      background-position: left;
+      background-size: contain
+    }
+
+    .step.title {
+      min-height: 100vh;
+      text-align: center;
+      color: #f2f2f2
+    }
+
+    .layer.collage {
+      display: grid;
+      grid-template-columns: repeat(2, 25vw);
+      /* width of each photo */
+      grid-template-rows: repeat(2, 35vh);
+      /* height of each photo */
+      gap: 100px;
+      /* space between them */
+      place-content: center;
+      /* puts the whole group in the middle */
+    }
+
+    .layer.collage img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .scrolly {
+      position: relative;
+    }
+
+    /* 1. Full-screen sticky background that stays put while the text scrolls */
+    .graphic {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* Each image is a layer stacked on top of the others; only the active one is visible */
+    .layer {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background-repeat: no-repeat;
+      background-color: #000;
+    }
+
+    .layer.is-visible {
+      opacity: 1;
+    }
+
+    /* Optional dark tint so the boxes stand out on bright photos */
+    .graphic::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    /* 2. The steps scroll OVER the image */
+    .steps {
+      position: relative;
+      z-index: 1;
+      margin-top: -100vh;
+      /* pulls the text up on top of the sticky image */
+    }
+
+    .step {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* Change to justify-content: flex-start or flex-end to put boxes on the left or right */
+
+    /* 3. The text box itself */
+    .box {
+      width: 100%;
+      max-width: 600px;
+      /* background: rgba(14, 6, 26, 0.92); /* comment this out to get rid of box*/
+      padding: 1.5rem 1.75rem;
+      color: white;
+      /* border-radius: 10px; /* comment this out to get rid of box*/
+      /* box-shadow: 0 8px 30px rgba(0,0,0,0.3);*/
+      font-size: 1.15rem;
+      line-height: 1.6;
+    }
+
+    .box h2 {
+      margin: 0 0 .5rem;
+      font-size: 1.4rem;
+    }
+
+    .box p {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="scrolly">
+
+    <!-- THE IMAGES
+       Replace each background with your own photo, for example:
+       style="background-image: url('photo1.jpg')"
+       The colored gradients are just placeholders. -->
+    <div class="graphic">
+      <div class="layer is-visible" data-layer="0" style="background-image: url('Image\ 0.png')"></div>
+      <div class="layer left" data-layer="1" style="background-image: url('Image\ 1.png')"></div>
+      <div class="layer left" data-layer="2" style="background-image: url('Image\ 2.jpeg')"></div>
+      <div class="layer" data-layer="3" style="background-image: url('Image\ 3.png')"></div>
+      <div class="layer left" data-layer="4" style="background-image: url('Image\ 4.png')"></div>
+      <div class="layer left" data-layer="5" style="background-image: url('Image\ 5.png')"></div>
+      <div class="layer left" data-layer="6" style="background-image: url('Image\ 6.png')"></div>
+      <div class="layer left" data-layer="7" style="background-image: url('Image\ 7.png')"></div>
+      <div class="layer" data-layer="8" style="background-image: url('Image\ 8.jpg')"></div>
+      <div class="layer left" data-layer="9" style="background-image: url('Image\ 9.jpg')"></div>
+      <div class="layer left" data-layer="10" style="background-image: url('Image\ 10.png')"></div>
+      <div class="layer left" data-layer="11" style="background-image: url('Image\ 11.png')"></div>
+      <div class="layer" data-layer="12" style="background-image: url('Image\ 12.jpg')"></div>
+      <div class="layer left" data-layer="13" style="background-image: url('Image\ 13.png')"></div>
+      <div class="layer left" data-layer="14" style="background-image: url('Image\ 14.jpg')"></div>
+      <div class="layer collage" data-layer="15"> <!---put in the correct photos-->
+        <img src="Image 15b.png" alt="">
+        <img src="Image 15d.jpg" alt="">
+        <img src="Image 15c.jpg" alt="">
+        <img src="Image 15a.jpg" alt="">
+      </div>
+      <div class="layer" data-layer="16" style="background-image: url('Image\ 16.png')"></div>
+      <div class="layer left" data-layer="17" style="background-image: url('Image\ 17.png')"></div>
+      <div class="layer left" data-layer="18" style="background-image: url('Image\ 18.png')"></div>
+      <div class="layer collage" data-layer="19"> <!---put in the correct photos-->
+        <img src="Image 19a.jpg" alt="">
+        <img src="Image 19b.jpg" alt="">
+        <img src="Image 19c.jpg" alt="">
+      </div>
+      <div class="layer left" data-layer="20" style="background-image: url('Image\ 20.jpg')"></div>
+      <div class="layer" data-layer="21" style="background-image: url('Image\ 21.jpg')"></div>
+      <div class="layer collage" data-layer="22"> <!---put in the correct photos-->
+        <img src="Image 22a.png" alt="">
+        <img src="Image 22b.png" alt="">
+        <img src="Image 22c.jpg" alt="">
+      </div>
+      <div class="layer left" data-layer="23" style="background-image: url('Image\ 23.png')"></div>
+      <div class="layer left" data-layer="24" style="background-image: url('Image\ 24.png')"></div>
+      <div class="layer collage" data-layer="25"> <!---put in the correct photos-->
+        <img src="Image 25d.png" alt="">
+        <img src="Image 25b.png" alt="">
+        <img src="Image 25c.png" alt="">
+        <img src="Image 25a.jpg" alt="">
+      </div>
+      <div class="layer" data-layer="26" style="background-image: url('Image\ 26.png')"></div>
+      <div class="layer" data-layer="27" style="background-image: url('Image\ 27.jpg')"></div>
+      <div class="layer" data-layer="28" style="background-image: url('Image\ 28.png')"></div>
+      <div class="layer collage" data-layer="29"> <!---put in the correct photos-->
+        <img src="Image 29b.jpg" alt="">
+        <img src="Image black.png" alt="">
+        <img src="Image black.png" alt="">      
+        <img src="Image 29a.jpg" alt="">
+      </div>
+      <div class="layer left" data-layer="30" style="background-image: url('Image\ 30.jpg')"></div>
+      <div class="layer left" data-layer="31" style="background-image: url('Image\ 31.png')"></div>
+      <div class="layer is-visible" data-layer="32" style="background-color: #000;"></div>
+      <div class="layer is-visible" data-layer="33" style="background-color: #000;"></div>
+      <div class="layer is-visible" data-layer="34" style="background-color: #000;"></div>
+
+
+    </div>
+
+    <!-- THE TEXT BOXES
+       data-step says which image to show when this box reaches the middle of the screen. -->
+    <div class="steps">
+      <div class="step title" data-step="0">
+        <div>
+          <h1>Light Reading</h1>
+          <h2>Understanding what photos of space are showing us</h2>
+          <p>Saskia Grisaru</p>
+        </div>
+      </div>
+      <div class="step right" data-step="1">
+        <div class="box">
+          <p>This was the first image taken by the Hubble Space Telescope shortly after its launch in 1990. <a
+              href="https://www.bbc.com/videos/cyer6244j6xo" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Broadcast</a> on BBC, it reached millions. Joe DePasquale,
+            then about 10 years old, was among them.</p>
+        </div>
+      </div>
+      <div class="step right" data-step="2">
+        <div class="box">
+          <p>NASA recognized the value in releasing images from the publicly-funded telescope to the public. Over the
+            following months and years, they published more photos, of better quality (thanks to a manufacturing <a
+              href="https://science.nasa.gov/mission/hubble/observatory/design/optics/hubbles-mirror-flaw/" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">fix</a>). These photos filled DePasquale with curiosity and awe.</p>
+        </div>
+      </div>
+      <div class="step" data-step="3">
+        <div class="box">
+          <p>Three decades later, DePasquale would himself have a hand in the first images from Hubble’s successor: the
+            James Webb Space Telescope, launched in 2021. A visual developer, <a
+              href="https://jdepasquale.com" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">DePasquale</a> works at the <a
+              href="https://www.stsci.edu/home" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Space Telescope
+            Science Institute</a> in Baltimore.</p>
+        </div>
+      </div>
+      <div class="step right" data-step="4">
+        <div class="box">
+          <p>Fundamentally, images of space are scientific documents of “paramount importance,” said <a
+              href="https://www.iau.org/IAU/Shared_Content/Contacts/ContactLayouts/Profile.aspx?ID=38500" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Lukas Furtak</a>, who
+            researches galaxy clusters at the University of Texas at Austin. The only way we can observe the universe is
+            through light, and through images we capture that light, Furtak explained.</p>
+        </div>
+      </div>
+      <div class="step right" data-step="5">
+        <div class="box">
+          <p>But this scientific perspective is fundamentally indissociable from a non-scientific one. Images of space
+            are the public face of astronomy, a means for humans to connect to and marvel at the beauty of the cosmos.
+          </p>
+        </div>
+      </div>
+      <div class="step right" data-step="6">
+        <div class="box">
+          <p>For non-astronomers, understanding the images themselves might seem astronomically difficult. And indeed,
+            “in order to really, really, really understand what you’re looking at, you kind of need a PhD,” joked <a
+              href="https://liztino.github.io" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Liz Tarantino</a>, a colleague of DePasquale’s at Space Telescope.</p>
+        </div>
+      </div>
+      <div class="step right" data-step="7">
+        <div class="box">
+          <p>Still, there are ways to make these images more legible to the rest of us. By learning to recognize and distinguish patterns, non-scientists can develop a vocabulary to "read" them. The first step, Tarantino said, is reframing your thinking.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="8">
+        <div class="box">
+          <h2>TO UNDERSTAND SPACE PHOTOS, REFRAME YOUR THINKING</h2>
+        </div>
+      </div>
+
+      <div class="step right" data-step="9">
+        <div class="box">
+          <p>Our eyeballs are not 21 feet wide, capable of seeing infrared light, or parked out in space 1 million miles away from Earth. In other words, we cannot see what James Webb Space Telescope sees.</p>
+        </div>
+      </div>
+
+      <div class="step right" data-step="10">
+        <div class="box">
+          <p>Tens of scientists and visual developers work to translate the data that Webb receives—photons of light captured by cameras—into colors that we can see. “The colors are a translation, like translating a language into something we can understand with our perception,” said <a
+              href="https://science.jpl.nasa.gov/people/klaus-pontoppidan/" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Klaus Pontoppidan</a>, a senior research scientist at NASA Jet Propulsion Laboratory.</p>
+        </div>
+      </div>
+
+      <div class="step right" data-step="11">
+        <div class="box">
+          <p>Webb was designed to capture light in the infrared range. Humans can’t see infrared light—we see what are called “visible” wavelengths. Webb’s ability to capture images in the infrared allows it to see through dust, which is ubiquitous in space, said <a
+              href="https://adamsmercina.wixsite.com/astrosmercina" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Adam Smercina</a>, an astronomer at Tufts University specialized in nearby galaxies.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="12">
+        <div class="box">
+          <p>Infrared telescopes also allow us to see farther back in time and space than we ever have. Objects farther away in the universe undergo a process called “redshifting,” by which the waves of light they emit are stretched, pulled into the infrared range, as the universe expands. Infrared telescopes enable us to see redshifted objects from the early universe, Furtak said.</p>
+        </div>
+      </div>
+
+      <div class="step right" data-step="13">
+        <div class="box">
+          <p>Webb is the largest and highest-resolution infrared telescope. Every telescope functions differently from the others, so it’s hard to compare images between them. Webb's images can be distinguished by a characteristic 6-pronged star, which denotes how its mirror diffracts light and is like a “visual signature,” said <a
+              href="https://www.linkedin.com/in/alyssa-pagan-058170144/" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Alyssa Pagan</a>, another science visual developer working at Space Telescope.</p>
+        </div>
+      </div>
+
+      <div class="step right" data-step="14">
+        <div class="box">
+          <p>Objects in space leave their own signatures. Our eyes are very good at picking out these patterns, like the difference between a star and more nebulous gas and dust, Smercina said. The universe is “very fractal,” DePasquale said, meaning that the patterns replicate themselves across different scales. From images of protostars measuring less than a single light year across, to images of galaxy clusters several millions of light years wide, these patterns dis- and reassemble, in tune with physical processes at play everywhere in the universe.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="15">
+        <div class="box">
+          <h2>PROTOSTARS</h2>
+        </div>
+      </div>
+
+      <div class="step" data-step="16">
+        <div class="box">
+          <p>Protostars are newborn stars at the very earliest stage of birth. A star is born when clouds of hot gas coalesce, and afterwards, it spends the rest of its lifetime releasing gas and dust back into space. Protostars are still heavily enshrouded in their natal nebulae, said <a
+              href="https://science.psu.edu/astro/people/kll207" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Kevin Luhman</a>, a specialist in brown dwarfs at Pennsylvania State University.</p>
+        </div>
+      </div>
+
+      <div class="step right" data-step="17">
+        <div class="box">
+          <p>Dust, which is cool, tends to emit light at long, low-energy infrared wavelengths. Because cooler light is redder in the visible spectrum—a redder flame is cooler than a bluer one—scientists assign red tones to cooler light in infrared, too, Luhman explained. When protostars like the one circled here shine through the dust, they appear redder, just as the sun appears red when there’s smoke in the air.</p>
+        </div>
+      </div>
+
+      <div class="step right" data-step="18">
+        <div class="box">
+          <p>Conversely, bluer nebulae have shorter wavelengths and higher energy, meaning that they correspond to gas that is either hotter than the dust, or closer to us, or both.</p>
+        </div>
+      </div>      
+
+      <div class="step" data-step="19">
+        <div class="box">
+          <h2>PLANETARY NEBULAE</h2>
+        </div>
+      </div>      
+
+      <div class="step right" data-step="20">
+        <div class="box">
+          <p>Planetary nebulae are regions of gas and dust sloughed off by a dying star. Photos of them showcase the gas and dust radiating outwards.</p>
+        </div>
+      </div>  
+ 
+      <div class="step" data-step="21">
+        <div class="box">
+          <p>This image shows a close-up of the gas and dust from the Helix Nebula, formed into knots and pushed away from the center by stellar winds emanating from the dying star. Hot, blue stars shine in the foreground.</p>
+        </div>
+      </div>  
+
+      <div class="step" data-step="22">
+        <div class="box">
+          <h2>STAR-FORMING REGIONS</h2>
+        </div>
+      </div>  
+
+      <div class="step right" data-step="23">
+        <div class="box">
+          <p>Images of star-forming regions capture the dense, cold clouds of dust and gas within which stars form. They feature stars, gas and dust interacting.</p>
+        </div>
+      </div>  
+
+      <div class="step" data-step="24">
+        <div class="box">
+          <p>Sagittarius B2, pictured here, is a star-forming region in our own galaxy. The pockets of reddish gas are hydrogen, said <a
+              href="https://adamgginsburg.com" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Adam Ginsburg</a>, who researches cluster formation at the University of Florida. Hydrogen glows when heat from nearby massive stars cause it to ionize, losing an electron and emitting light.</p>
+        </div>
+      </div>  
+
+      <div class="step" data-step="25">
+        <div class="box">
+          <h2>GALAXIES</h2>
+        </div>
+      </div>  
+
+      <div class="step" data-step="26">
+        <div class="box">
+          <p>Galaxies are massive systems made up of stars, gas, dust and dark matter all bound together by gravity. The coalescence of all that matter typically flattens out into a disk, <a
+              href="https://www.cfa.harvard.edu/index.php/research/topic/disks" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">conserving</a> angular momentum. Large galaxies like this one, Centaurus A, have a supermassive black hole at their center, invisible but for the effect that it has on its surroundings, explained <a
+              href="https://www.esa.int/media/webbtelescopewomen-macarena-garcia-marin" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Macarena Garcia Marin</a>, a Webb project scientist for Space Telescope and the European Space Agency.</p>
+        </div>
+      </div>  
+
+      <div class="step" data-step="27">
+        <div class="box">
+          <p>The definition of a galaxy is a little controversial, said Tarantino, because scientists don’t agree on a minimum size. This galaxy is a dwarf galaxy, which tend to have “irregular, clumpy, weird-looking morphologies,” she said.</p>
+        </div>
+      </div> 
+
+      <div class="step" data-step="28">
+        <div class="box">
+          <p>M82 is more typical in shape, with a dense starry and dusty core and stars spiraling outwards. The prominent outflow of gas and dust from either side indicate intense star formation in the center of the galaxy, Smercina said. The outer, redder dust is made up of polycyclic aromatic hydrocarbons, or PAHs, which are also produced in smoke on Earth. They’re probably the reason that space <a
+              href="https://www.space.com/what-does-space-smell-like" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">smells</a> like gunpowder and burnt steak.</p>
+        </div>
+      </div> 
+
+      <div class="step" data-step="29">
+        <div class="box">
+          <h2>GALAXY CLUSTERS AND DEEP FIELDS</h2>
+        </div>
+      </div> 
+
+      <div class="step" data-step="30">
+        <div class="box">
+          <p>Galaxy clusters are groups of hundreds to thousands of individual galaxies held together through gravitational attraction. The deepest images that Webb takes, which can capture these clusters, are produced by aiming the telescope at one area in the sky for hours at a time, so as to gradually reconstitute images of the faintest, farthest light in the universe.</p>
+        </div>
+      </div> 
+
+      <div class="step right" data-step="31">
+        <div class="box">
+          <p>Deep field shots often incorporate gravitational lensing, a phenomenon caused by objects so massive that they distort space and magnify the light coming from behind them, Furtak said. Gravitational lensing distorts the light seen in this photo of Abell 2744 and also creates a duplicative effect: the little red dot labeled [A,B,C] is the same object copied twice over.</p>
+        </div>
+      </div> 
+
+      <div class="step" data-step="32">
+        <div class="box">
+          <p>Webb has been observing for five years, and could be out for around <a
+              href="https://science.nasa.gov/mission/webb/faqs-full/#h-why-is-webb-optimized-for-near-and-mid-infrared-light" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">20 more</a>. Since its launch, the telescope has provided new insight into known phenomena and even introduced new phenomena entirely. “Each discovery opens new questions,” said Garcia Marin.</p>
+        </div>
+      </div> 
+
+      <div class="step" data-step="33">
+        <div class="box">
+          <p>A new telescope, the Nancy Grace Roman Space Telescope, will begin <a
+              href="https://spacecalendar.com/event/nancy-grace-roman-space-telescopes-first-images-to-be-made-public/" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">releasing</a> photos on December 7. Compared to Webb, Roman will take photos of the universe with a larger field of view, much faster. The two telescopes will work <a
+              href="https://svs.gsfc.nasa.gov/14891/" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">in conjunction</a>: after Roman surveys broad swaths of sky, Webb’s narrower cameras will be trained on smaller areas to capture greater detail.</p>
+        </div>
+      </div> 
+  
+      <div class="step" data-step="34">
+        <div class="box">
+          <p>It’s a “golden age” of astronomy, said Pontoppidan. Everyone—not just astronomers—is reaping the benefits.</p>
+        </div>
+      </div>     
+
+
+      <!----add sections before here-->
+    </div>
+  </section>
+
+  <footer>
+    <h2>Photos courtesy of NASA, ESA and <a
+              href="https://keflavich.github.io/talks/chiefland_astrofest_2026.html#/" style="color: rgb(36, 214, 220)" target="_blank" rel="noopener noreferrer">Adam Ginsburg</a>.</h2>
+  </footer>
+
+  <script>
+    const layers = document.querySelectorAll('.layer');
+
+    function showStep(n) {
+      layers.forEach(layer => {
+        layer.classList.toggle('is-visible', layer.dataset.layer === n);
+      });
+    }
+
+    // Fires when a step crosses the middle of the screen
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) showStep(entry.target.dataset.step);
+      });
+    }, { rootMargin: '-50% 0px -50% 0px' });
+
+    document.querySelectorAll('.step').forEach(step => observer.observe(step));
+  </script>
+</body>
+
+</html>
